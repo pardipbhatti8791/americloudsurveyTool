@@ -5,15 +5,14 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Authentication Authorization')
-    .setDescription(
-      'In this app we are handling authentication, authorization, refreshtoken',
-    )
+    .setTitle('Survey Tool Apis')
+    .setDescription('In this app we are handling survey tool apis')
     .setVersion('1.0')
-    .addTag('AuthApp')
+    .addTag('SurveyTool')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
