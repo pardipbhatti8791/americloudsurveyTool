@@ -1,3 +1,4 @@
+import { AuthType } from './enums/auth-type.enum';
 import {
   ConflictException,
   Inject,
@@ -28,6 +29,12 @@ export class AuthenticationService {
         data: {
           email: signUpDto.email,
           password: await this.hashingService.hash(signUpDto.password),
+          typeId: {
+            connect: { id: 1 },
+          },
+        },
+        include: {
+          typeId: true,
         },
       });
     } catch (err) {
