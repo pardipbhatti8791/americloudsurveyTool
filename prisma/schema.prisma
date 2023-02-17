@@ -11,18 +11,58 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String?
-  password String
-  posts Post[]
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  name       String?
+  password   String
+  typeId     UserTypes @relation(fields: [userTypeId], references: [id])
+  userTypeId Int
+  overlays overlays[]
+  tools tools[]
+  layers layers[]
 }
 
-model Post {
-  id        Int      @default(autoincrement()) @id
-  title     String
-  content   String?
-  published Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model UserTypes {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  User User[]
+}
+
+model projects {
+  id   Int    @id @default(autoincrement())
+  title String
+  vanue_title String
+  conducted_by String
+}
+
+model overlays {
+  id   Int    @id @default(autoincrement())
+  title String
+  description String?
+  userId User @relation(fields: [created_by], references: [id])
+  created_by Int
+  layers layers[]
+}
+
+model tools {
+  id   Int    @id @default(autoincrement())
+  title String
+  img String?
+  description String?
+  userId User @relation(fields: [created_by], references: [id])
+  created_by Int
+  layers layers[]
+}
+
+model layers {
+  id   Int    @id @default(autoincrement())
+  title String
+  img String?
+  description String?
+  overlayId overlays @relation(fields: [overlay_id], references: [id])
+  overlay_id Int
+  toolId tools @relation(fields: [tool_id], references: [id])
+  tool_id Int
+  userId User @relation(fields: [created_by], references: [id])
+  created_by Int
 }
