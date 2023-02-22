@@ -1,3 +1,4 @@
+import { Overlay } from './../overlays/entities/overlay.entity';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateLayerDto } from './dto/create-layer.dto';
 import { UpdateLayerDto } from './dto/update-layer.dto';
@@ -74,5 +75,24 @@ export class LayersService {
   private extractTokenFromHeader(request: Request): string | undefined {
     const [_, token] = request.headers.authorization?.split(' ') ?? [];
     return token;
+  }
+
+  findOverLayId(id: number) {
+    return this.prismaService.layers.findMany({
+      where: { overlay_id: Number(id) },
+      include: {
+        toolId: true,
+        overlayId: true,
+      },
+    });
+  }
+
+  findAllTools() {
+    console.log('inside findAllTools');
+    return this.prismaService.tools.findMany({
+      include: {
+        layers: true,
+      },
+    });
   }
 }

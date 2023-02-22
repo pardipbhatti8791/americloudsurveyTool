@@ -26,6 +26,11 @@ export class LayersController {
     return this.layersService.findAll();
   }
 
+  @Get('by-tools')
+  findAllTools() {
+    return this.layersService.findAllTools();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.layersService.findOne(+id);
@@ -39,5 +44,10 @@ export class LayersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.layersService.remove(+id);
+  }
+
+  @Get('by-overlay/:id')
+  findOverLayId(@Param('id') id: number) {
+    return this.layersService.findOverLayId(id);
   }
 }
