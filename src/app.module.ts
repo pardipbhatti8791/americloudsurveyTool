@@ -7,6 +7,9 @@ import { ProjectModule } from './project/project.module';
 import { OverlaysModule } from './overlays/overlays.module';
 import { ToolsModule } from './tools/tools.module';
 import { LayersModule } from './layers/layers.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { CloudinaryService } from './cloudinary/cloudinary.service';
+import { UploadFileController } from './upload-file/upload-file.controller';
 
 @Module({
   imports: [
@@ -16,8 +19,9 @@ import { LayersModule } from './layers/layers.module';
     OverlaysModule,
     ToolsModule,
     LayersModule,
+    CloudinaryModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UploadFileController],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule {}
