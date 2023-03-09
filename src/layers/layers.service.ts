@@ -29,12 +29,20 @@ export class LayersService {
       if (!payload) {
         throw new UnauthorizedException('Invalid email/password');
       }
-      console.log('payload', payload);
       return this.prismaService.layers.create({
         data: {
           title: createLayerDto.title,
           description: createLayerDto.description,
           img: createLayerDto.img,
+          type: createLayerDto.type,
+          thickness: createLayerDto.thickness,
+          shapeImage: createLayerDto.shapeImage,
+          colorCode: createLayerDto.colorCode,
+          height: createLayerDto.height,
+          width: createLayerDto.width,
+          thicknessType: createLayerDto.thicknessType,
+          heightType: createLayerDto.heightType,
+          widthType: createLayerDto.widthType,
           userId: {
             connect: { id: payload.sub },
           },

@@ -19,4 +19,31 @@ export class CreateLayerDto {
 
   @ApiProperty()
   description: string;
+
+  @ApiProperty()
+  type: string;
+
+  @ApiProperty()
+  thickness: number;
+
+  @ApiProperty()
+  shapeImage: string;
+
+  @ApiProperty()
+  colorCode: string;
+
+  @ApiProperty()
+  height: number;
+
+  @ApiProperty()
+  width: number;
+
+  @ApiProperty()
+  thicknessType: string;
+
+  @ApiProperty()
+  heightType: string;
+
+  @ApiProperty()
+  widthType: string;
 }

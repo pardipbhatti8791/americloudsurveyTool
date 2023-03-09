@@ -59,6 +59,15 @@ model layers {
   title String
   img String?
   description String?
+  type String?
+  thickness Int?
+  thicknessType String?
+  shapeImage String?
+  colorCode String?
+  height Int?
+  heightType String?
+  width Int?
+  widthType String?
   overlayId overlays @relation(fields: [overlay_id], references: [id])
   overlay_id Int
   toolId tools @relation(fields: [tool_id], references: [id])
