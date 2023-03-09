@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE `layers` ADD COLUMN `colorCode` VARCHAR(191) NULL,
+    ADD COLUMN `height` VARCHAR(191) NULL,
+    ADD COLUMN `shapeImage` VARCHAR(191) NULL,
+    ADD COLUMN `thickness` VARCHAR(191) NULL,
+    ADD COLUMN `type` VARCHAR(191) NULL,
+    ADD COLUMN `width` VARCHAR(191) NULL;
