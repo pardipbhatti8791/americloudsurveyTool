@@ -58,11 +58,13 @@ model layers {
   id   Int    @id @default(autoincrement())
   title String
   img String?
+  imgType String?
   description String?
   type String?
   thickness Int?
   thicknessType String?
   shapeImage String?
+  shapeImageType String?
   colorCode String?
   height Int?
   heightType String?

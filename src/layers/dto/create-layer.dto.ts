@@ -18,6 +18,9 @@ export class CreateLayerDto {
   img: string;
 
   @ApiProperty()
+  imgType: string;
+
+  @ApiProperty()
   description: string;
 
   @ApiProperty()
@@ -28,6 +31,9 @@ export class CreateLayerDto {
 
   @ApiProperty()
   shapeImage: string;
+
+  @ApiProperty()
+  shapeImageType: string;
 
   @ApiProperty()
   colorCode: string;
