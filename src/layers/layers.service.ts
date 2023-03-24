@@ -1,4 +1,3 @@
-import { Overlay } from './../overlays/entities/overlay.entity';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateLayerDto } from './dto/create-layer.dto';
 import { UpdateLayerDto } from './dto/update-layer.dto';
@@ -75,7 +74,40 @@ export class LayersService {
   }
 
   update(id: number, updateLayerDto: UpdateLayerDto) {
-    return `This action updates a #${id} layer`;
+    console.log('id____', id);
+    console.log('updateLayerDto******', updateLayerDto);
+    return this.prismaService.layers.update({
+      data: {
+        title: updateLayerDto.title,
+        description: updateLayerDto.description,
+        img: updateLayerDto.img,
+        imgType: updateLayerDto.imgType,
+        type: updateLayerDto.type,
+        thickness: Number(updateLayerDto.thickness),
+        shapeImage: updateLayerDto.shapeImage,
+        shapeImageType: updateLayerDto.shapeImageType,
+        colorCode: updateLayerDto.colorCode,
+        height: updateLayerDto.height,
+        width: updateLayerDto.width,
+        thicknessType: updateLayerDto.thicknessType,
+        heightType: updateLayerDto.heightType,
+        widthType: updateLayerDto.widthType,
+        toolId: {
+          connect: { id: updateLayerDto.tool_id },
+        },
+        overlayId: {
+          connect: { id: updateLayerDto.overlay_id },
+        },
+      },
+      include: {
+        userId: true,
+        toolId: true,
+        overlayId: true,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   remove(id: number) {

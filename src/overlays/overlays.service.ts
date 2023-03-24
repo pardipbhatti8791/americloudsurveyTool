@@ -56,7 +56,15 @@ export class OverlaysService {
   }
 
   update(id: number, updateOverlayDto: UpdateOverlayDto) {
-    return `This action updates a #${id} overlay`;
+    return this.prismaService.overlays.update({
+      data: {
+        title: updateOverlayDto.title,
+        description: updateOverlayDto.description,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   remove(id: number) {

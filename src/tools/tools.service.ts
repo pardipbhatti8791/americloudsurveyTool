@@ -56,7 +56,16 @@ export class ToolsService {
   }
 
   update(id: number, updateToolDto: UpdateToolDto) {
-    return `This action updates a #${id} tool`;
+    return this.prismaService.tools.update({
+      data: {
+        title: updateToolDto.title,
+        description: updateToolDto.description,
+        img: updateToolDto.img,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   remove(id: number) {
