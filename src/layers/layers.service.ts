@@ -74,8 +74,6 @@ export class LayersService {
   }
 
   update(id: number, updateLayerDto: UpdateLayerDto) {
-    console.log('id____', id);
-    console.log('updateLayerDto******', updateLayerDto);
     return this.prismaService.layers.update({
       data: {
         title: updateLayerDto.title,
@@ -129,12 +127,26 @@ export class LayersService {
     });
   }
 
-  findAllTools() {
-    console.log('inside findAllTools');
-    return this.prismaService.tools.findMany({
+  includeOverlayIds(allTools: any) {
+    const newTools = [...allTools];
+    for (const tool of newTools) {
+      const overlayIds = [];
+      for (const layer of tool.layers) {
+        if (!overlayIds.includes(layer.overlay_id)) {
+          overlayIds.push(layer.overlay_id);
+        }
+      }
+      tool.overlays = overlayIds;
+    }
+    return newTools;
+  }
+
+  async findAllTools() {
+    const allTools = await this.prismaService.tools.findMany({
       include: {
         layers: true,
       },
     });
+    return this.includeOverlayIds(allTools);
   }
 }

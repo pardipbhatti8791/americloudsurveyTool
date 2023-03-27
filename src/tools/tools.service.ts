@@ -28,7 +28,6 @@ export class ToolsService {
       if (!payload) {
         throw new UnauthorizedException('Invalid email/password');
       }
-      console.log('payload', payload);
       return this.prismaService.tools.create({
         data: {
           title: createToolDto.title,
